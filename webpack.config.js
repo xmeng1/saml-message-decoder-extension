@@ -37,6 +37,9 @@ module.exports = {
       chunks: ['index'],
     }),
     new CopyWebpackPlugin([
+      { from: './src/options.html' },
+    ]),
+    new CopyWebpackPlugin([
       { from: './src/static', to: 'static' },
     ]),
     new CopyWebpackPlugin([
