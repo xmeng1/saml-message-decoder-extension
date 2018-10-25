@@ -58,6 +58,9 @@ const processSamlRedirectBindingMessage = (data) => {
     const inflatedBytes = pako.inflateRaw(base64Decoded, { to: 'string' });
     const inflated = decodeURIComponent(inflatedBytes);
 
+    chrome.browserAction.setBadgeText({text: 'new'});
+    chrome.browserAction.setBadgeBackgroundColor({color: [255, 0, 0, 255]});
+
     const parameters = [];
     url.searchParams.forEach((value, name) => {
       parameters.push({ name, value });
@@ -138,6 +141,9 @@ const processSamlPostBindingMessage = (data) => {
       const inflated = decodeURIComponent(inflatedBytes);
       decoded = inflated;
     }
+
+    chrome.browserAction.setBadgeText({text: 'new'});
+    chrome.browserAction.setBadgeBackgroundColor({color: [255, 0, 0, 255]});
     const parameters = [];
     for (const [name, value] of Object.entries(formData)) {
       parameters.push({ name, value });
@@ -195,6 +201,14 @@ const renderContextMenu = () => {
         });
 
         renderContextMenu();
+      },
+    });
+
+    browserApi.contextMenus.create({
+      title: 'Clear badges',
+      contexts: ['browser_action'],
+      onclick: () => {
+        chrome.browserAction.setBadgeText({text: ''});
       },
     });
 
