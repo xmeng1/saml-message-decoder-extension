@@ -5,6 +5,7 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 const ChromeExtensionReloader  = require('webpack-chrome-extension-reloader');
 
 module.exports = {
+  watch:true,
   entry: {
     index: './src/index.js',
     listener: './src/listener.js',
